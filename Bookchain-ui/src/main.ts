@@ -14,9 +14,9 @@ import {
     SolletWalletAdapter,
     SolletExtensionWalletAdapter,
     TorusWalletAdapter,
+    BackpackWalletAdapter,
+    BraveWalletAdapter
 } from '@solana/wallet-adapter-wallets';
-import { BackpackWalletAdapter } from '@solana/wallet-adapter-backpack';
-import { BraveWalletAdapter } from '@solana/wallet-adapter-brave';
 
 import 'solana-wallets-vue/styles.css';
 import buffer from 'buffer';

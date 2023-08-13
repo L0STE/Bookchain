@@ -1,12 +1,26 @@
 <script setup lang="ts">
-import { WalletMultiButton } from 'solana-wallets-vue';
+import { ref, watch, defineEmits } from 'vue';
+import { WalletMultiButton, useWallet } from 'solana-wallets-vue';
 import { RouterLink, RouterView } from "vue-router";
+
+const { connected, publicKey } = useWallet();
+
+
+const emit = defineEmits();
+
+watch(connected, (newValue) => {
+    emit('walletStatusChanged', newValue);
+});
+
+watch(publicKey, (newValue) => {
+    emit('publicKey', newValue.toString());
+});
 
 </script>
 
 
 <template>
-  <nav class="bg-transparent p-4 sticky z-50 h-32">
+  <nav class="bg-transparent p-4 sticky z-10 h-32">
     <div class="container mx-auto h-full">
       <div class="flex justify-between items-center h-full">
 

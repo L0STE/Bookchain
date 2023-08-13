@@ -8,9 +8,13 @@ module.exports = {
       },
       fontSize: {
         'LandingTitle': '46px',
-      }
+        'ProfileRegisterTitle': '30px',
+        'ProfileSmall': '8px',
+      },
+      borderWidth: {
+        'half': '0.5px',  // Defining the custom border width here
+      },
     },
   },
   plugins: [],
 }
-
