@@ -1,20 +1,49 @@
 <script setup lang="ts">
-import { ref, watch, defineEmits } from 'vue';
-import { WalletMultiButton, useWallet } from 'solana-wallets-vue';
+import { ref, watch, computed } from 'vue';
+import * as anchor from "@project-serum/anchor";
+import { utf8 } from "@project-serum/anchor/dist/cjs/utils/bytes";
+import { findProgramAddressSync } from "@project-serum/anchor/dist/cjs/utils/pubkey";
+import { WalletMultiButton, useWallet, useConnection, useAnchorWallet } from 'solana-wallets-vue';
 import { RouterLink, RouterView } from "vue-router";
+import { BookchainPublickey } from "@/program";
+import IDL from "@/program/bookchain.json";
+
 
 const { connected, publicKey } = useWallet();
-
-
+const { connection } = useConnection();
+const anchorWallet = useAnchorWallet();
+let accountInfo = ref(null);
 const emit = defineEmits();
+
+const program = computed(() => {
+  if (anchorWallet.value) {
+    const provider = new anchor.AnchorProvider(
+      connection.value,
+      anchorWallet.value,
+      anchor.AnchorProvider.defaultOptions()
+    );
+    return new anchor.Program(IDL, BookchainPublickey, provider);
+  }
+  return null;
+});
 
 watch(connected, (newValue) => {
     emit('walletStatusChanged', newValue);
 });
 
-watch(publicKey, (newValue) => {
+watch(publicKey, async (newValue) => {
     emit('publicKey', newValue.toString());
+    console.log(checkProfileExists());
 });
+
+async function checkProfileExists(): Promise<boolean> {
+  const [profilePDA, _] = findProgramAddressSync(utf8.encode("profile"), publicKey.toBuffer(), program.programId);
+  if (accountInfo = await connection.getAccountInfo(profilePDA)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 </script>
 

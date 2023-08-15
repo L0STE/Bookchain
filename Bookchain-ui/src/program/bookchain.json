@@ -1,0 +1,81 @@
+{
+  "version": "0.1.0",
+  "name": "bookchain_contract",
+  "instructions": [
+    {
+      "name": "profileInit",
+      "accounts": [
+        {
+          "name": "profile",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "initializer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "username",
+          "type": "string"
+        },
+        {
+          "name": "profileBump",
+          "type": "u8"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Profile",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "username",
+            "type": "string"
+          },
+          {
+            "name": "projects",
+            "type": "u8"
+          },
+          {
+            "name": "jobs",
+            "type": "u8"
+          },
+          {
+            "name": "isPremium",
+            "type": "bool"
+          },
+          {
+            "name": "till",
+            "type": "i64"
+          },
+          {
+            "name": "profileBump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "TooManyCharacters",
+      "msg": "The name is too long. (max 20 characters)"
+    }
+  ]
+}

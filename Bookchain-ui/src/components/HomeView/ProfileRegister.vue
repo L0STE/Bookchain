@@ -17,7 +17,7 @@ const radioBgClass = computed(() => ({
     <div class="bg-white p-8 rounded-xl w-4/5 max-w-xl text-center">
       <h1 class="text-black font-raleway font-bold text-ProfileRegisterTitle mb-4">Create Profile</h1>
 
-      <div class="p-4">
+      <div class="p-4 mt-6">
         <!-- Username Input -->
         <div class="mb-4">
           <label class="text-black font-raleway font-bold text-sm block mb-1 text-left">Username:</label>
@@ -28,23 +28,6 @@ const radioBgClass = computed(() => ({
         <div class="mb-4">
           <label class="text-black font-raleway font-bold text-sm block mb-1 text-left">Your Wallet:</label>
           <input type="text" :value="props.publicKey" class="border-half border-black bg-gray-200 bg-opacity-60 p-2 h-10 w-full rounded text-black font-raleway font-thin" readonly>
-        </div>
-
-        <!-- Radio Buttons -->
-        <label class="block text-black font-raleway font-bold text-sm mb-2 text-left">Role:</label>
-        <div class="flex space-x-4 mb-4">
-            <label class="flex flex-col items-center">
-            <input type="radio" name="role" value="Employee" v-model="selectedRole" class="hidden">
-            <div :class="radioBgClass.Employee" class="border border-black h-8 w-[150px] rounded flex items-center justify-center text-black font-raleway font-thin">Employee</div>
-            </label>
-            <label class="flex flex-col items-center">
-            <input type="radio" name="role" value="Employer" v-model="selectedRole" class="hidden">
-            <div :class="radioBgClass.Employer" class="border border-black h-8 w-[150px] rounded flex items-center justify-center text-black font-raleway font-thin">Employer</div>
-            </label>
-            <label class="flex flex-col items-center">
-            <input type="radio" name="role" value="Both" v-model="selectedRole" class="hidden">
-            <div :class="radioBgClass.Both" class="border border-black h-8 w-[150px] rounded flex items-center justify-center text-black font-raleway font-thin">Both</div>
-            </label>
         </div>
 
         <!-- Submit Button -->
